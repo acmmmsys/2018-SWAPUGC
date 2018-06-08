@@ -8,7 +8,11 @@
 This is the repository for *SWAPUGC*: a platform for creating applications that consume geotagged User-Generated Content (UGC), as presented at the 9th ACM Multimedia Systems Conference (MMSys '18).  
  DOI: [10.1145/3204949.3208142](https://doi.org/10.1145/3204949.3208142).
 
-You can find the current release repository of SWAPUGC [here](https://github.com/emmanouil/SWAPUGC)
+You can find the current release repository of SWAPUGC [here](https://github.com/emmanouil/SWAPUGC). 
+Example features implemented in the current release repository that are not available to the frozen MMSYS repository:
+* Multiple representations
+* Sensor-based adaptation algorithms
+* Simulation for network and/or stream quality updates
 
 ---
 
@@ -24,7 +28,7 @@ GoTo:
 
 ## About
 
-The about page is [here](https://github.com/acmmmsys/2018-SWAPUGC/blob/master/ABOUT.md).
+The about page is [here](https://github.com/acmmmsys/2018-SWAPUGC/blob/mmsys/ABOUT.md).
 
 TL;DR:  
 SWAPUGC is a platform for building web applications that consume geotagged UGC, in a syncrhonous and adaptive manner. Some key features:
@@ -55,13 +59,14 @@ When the client is launched it does the following, in the corresponding order:
 
 ## Demo
 
-The current demo is available at [https://emmanouil.github.io/SWAPUGC/](https://emmanouil.github.io/SWAPUGC/)
+The current demo is available at [https://emmanouil.github.io/SWAPUGC/](https://emmanouil.github.io/SWAPUGC/). 
+This demo is the up-to-date version and new scenarios are added constantly (example differences with MMSYS version: multiple representations, adaptation algorithms, etc).
 
 The MMSys '18 demo (described in the publication) is available at [https://acmmmsys.github.io/2018-SWAPUGC/](https://acmmmsys.github.io/2018-SWAPUGC/).   
 All the sample videos are encoded using H264, in 1080p at 2000kbps with 2s-long segments. Because we are simulating live scenario with dynamic switching, the buffer size is one segment, thus a stable high-speed connection is required; if such is not available, try running the demo locally.
 
 To run a local demo:
-1. [Download](https://github.com/acmmmsys/2018-SWAPUGC/archive/master.zip) and extract, or Clone (`git clone https://github.com/acmmmsys/2018-SWAPUGC.git`) the repository
+1. [Download](https://github.com/acmmmsys/2018-SWAPUGC/archive/mmsys.zip) and extract, or Clone (`git clone https://github.com/acmmmsys/2018-SWAPUGC.git`) the repository
 2. Start an http server on the top dir of your local repository copy (e.g. download, copy and run [Mongoose](https://cesanta.com/binary.html), or `python -m http.server 8080` in the `SWAPUGC` folder)
 3. Open your browser, and navigate to the location of `index.html` (e.g. http://localhost:8080/index.html - for port = 8080)
 
@@ -86,6 +91,7 @@ With MP4Box, an example command to generate the mpd file [1] and the associated 
 
 NOTE: MP4Box does _not_ do any transcoding on the media files. For that, we used ffmpeg. An example command for encoding a video in x264 (audio aac @ 48kHz sample rate) with framerate = 30 fps and GOP size of 30 frames at 2Mbps bitrate, scaled with height = 1080px would be :
 `ffmpeg.exe -i 20140325_121238.webm -r 30 -preset slow -vf scale=-1:1080 -c:v libx264 -b:v 2000k -movflags +faststart -sc_threshold 0 -keyint_min 30 -g 30 -c:a aac -ar 48000 20140325_121238.mp4`
+(hint: if ffmpeg throws a scaling error you can use `scale=-2:1080`)
 
 To analyze generated files you can use MP4Box as well (e.g. `MP4Box -info 20140325_121238.mp4` or `MP4Box -info 1 20140325_121238.mp4` for info only on the first track)
 
